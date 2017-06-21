@@ -1,7 +1,12 @@
-package ldg.library;
+package dataspark.library;
 
 import processing.core.PApplet;
 import controlP5.*;
+
+/*
+ * Class which sends a data request to the data handler and receives values from it.
+ * It returns this values on demand from the processing sketch.
+ */
 
 public class TwitterRequest {
 	PApplet parent; // The processing script which runs the library.
@@ -10,7 +15,7 @@ public class TwitterRequest {
 	int maxValue = Integer.MAX_VALUE; // The maximum value for the slider.
 	int minValue = 0; // The minimum value for the slider.
 	int first = 0; // 1 if getValue has already been called once, 0 otherwise.
-	SecondApplet sa; // The Applet which contains the slider.
+	data_simulator ds; // The Applet which contains the slider.
 	
 	public TwitterRequest(PApplet parent, String query) {
 		this.parent = parent;
@@ -23,8 +28,8 @@ public class TwitterRequest {
 		// If it is the first time, create and run the applet with the slider.
 		if (first == 0){
 			String[] args = {"twitter_Simulator"};
-			sa = new SecondApplet();
-			PApplet.runSketch(args, sa);
+			ds = new data_simulator();
+			PApplet.runSketch(args, ds);
 			first = 1;
 		}
 		return pValue; // Returns the last value from the slider.
@@ -44,7 +49,7 @@ public class TwitterRequest {
 		
 	}
 	
-	class SecondApplet extends PApplet {
+	class data_simulator extends PApplet {
 
 		  ControlP5 myController;
 		  Slider s;

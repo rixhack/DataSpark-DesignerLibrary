@@ -1,4 +1,4 @@
-package ldg.library;
+package dataspark.library;
 
 import static org.junit.Assert.*;
 
@@ -34,19 +34,22 @@ public class DataRequestTest {
 	
 	@Test
 	public void testSecondApplet() {
-		assertNull(tr.sa);
+		assertNull(tr.ds);
 		tr.getValue();
-		assertNotNull(tr.sa);
+		assertNotNull(tr.ds);
 	}
 	
 	@Test
-	public void testSlider() {
+	public void testSlider() throws InterruptedException {
 		assertEquals(0, tr.getValue());
-		assertNotNull(tr.sa);
-		tr.sa.setup();
-		tr.sa.s.changeValue(5);
-		tr.sa.draw();
-		assertEquals(5.0,tr.sa.s.getValue(),0.0001);
+		assertNotNull(tr.ds);
+		tr.ds.setup();
+		Thread.sleep(1000);
+		tr.ds.draw();
+		Thread.sleep(1000);
+		tr.ds.s.changeValue(5);
+		tr.ds.draw();
+		assertEquals(5.0,tr.ds.s.getValue(),0.0001);
 		assertEquals(5,tr.getValue());
 		tr.dispose();
 	}

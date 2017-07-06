@@ -17,7 +17,7 @@ public class TwitterRequest {
 	int first = 0; // 1 if getValue has already been called once, 0 otherwise.
 	data_simulator ds; // The Applet which contains the slider.
 	
-	public TwitterRequest(PApplet parent, String query) {
+	public TwitterRequest(PApplet parent, String query, int tw) {
 		this.parent = parent;
 		parent.registerMethod("dispose", this);
 		this.query = query;

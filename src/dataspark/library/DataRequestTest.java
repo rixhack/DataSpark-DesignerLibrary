@@ -11,7 +11,7 @@ import processing.core.PApplet;
 
 public class DataRequestTest {
 
-	TwitterRequest tr = new TwitterRequest(new PApplet(), "eindhoven");
+	TwitterRequest tr = new TwitterRequest(new PApplet(), "eindhoven", 10);
 	
 	@Test
 	public void testQuery() {

@@ -4,8 +4,10 @@ import processing.core.PApplet;
 import controlP5.*;
 
 /*
- * Class which sends a data request to the data handler and receives values from it.
- * It returns this values on demand from the processing sketch.
+ * Class which emulates the behaviour of the TwitterRequest class from the backend 
+ * processing library allowing the designer of a processing sketch to test different 
+ * data values with a slider tool.
+ * 
  */
 
 public class TwitterRequest {
@@ -23,7 +25,10 @@ public class TwitterRequest {
 		this.query = query;
 	}
 	
-	
+	/*
+	 * Returns the current value of the silder. If it's the first time the Processing
+	 * script calls the function, the Applet with the slider is created first.
+	 */
 	public int getValue(){
 		// If it is the first time, create and run the applet with the slider.
 		if (first == 0){
@@ -35,12 +40,20 @@ public class TwitterRequest {
 		return pValue; // Returns the last value from the slider.
 	}
 	
-	// Set maximum value for the slider.
+	/*
+	 * Sets the upper limit for the slider.
+	 * 
+	 * @param v: The value to be set as maximum.
+	 */
 	public void setMaxValue(int v){
 		this.maxValue = v;
 	}
 	
-	// Set minimum value for the slider.
+	/*
+	 * Sets the lower limit for the slider.
+	 * 
+	 * @param v: The value to be set as minimum.
+	 */
 	public void setMinValue(int v){
 		this.minValue = v;
 	}
@@ -49,14 +62,23 @@ public class TwitterRequest {
 		
 	}
 	
+	/*
+	 * Inner class inside TwitterRequest. It consists of the Applet that contains the slider.
+	 */
 	class data_simulator extends PApplet {
 
 		  ControlP5 myController;
 		  Slider s;
-		  
+		  	  
+		  /*
+		   * Sets the size of the window containing the slider.
+		   */
 		  public void settings() {
 		    size(250, (int) 375); // Size of the slider window.
 		  }
+		  /*
+		   * Creates and configures the slider.
+		   */
 		  public void setup() {
 		    myController = new ControlP5(this);
 		    s = myController.addSlider(query,minValue,maxValue,minValue,100, 63, 50, 250);
@@ -68,13 +90,20 @@ public class TwitterRequest {
 		    // Set the slider to increase 1 by 1 with integer values.
 		    s.setNumberOfTickMarks(maxValue-minValue+1);
 		  }
+		  /*
+		   * Function called once every frame. It updates the variable which is sent to the
+		   * sketch with the value of the slider.
+		   */
 		  public void draw() {
 		    background(247); // Set the background to light gray.
 		    fill(0);
 		    pValue = (int) s.getValue(); // Store in pValue the value from the slider each frame.
 		  }
 		  
-		  // Enable the slider to be modified with the keyboard.
+		  /*
+		   * Function triggered when a key is pressed. It allows controlling the slider
+		   * with the arrow keys.
+		   */
 		  public void keyPressed(){
 			  if (keyCode == 38){
 			    s.setValue(s.getValue()+1);
